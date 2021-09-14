@@ -42,6 +42,7 @@ if __name__ == "__main__":
     g.adicionaAdjacencia(1, 5), g.adicionaAdjacencia(5, 1)
     g.adicionaAdjacencia(1, 4), g.adicionaAdjacencia(4, 1)
     g.adicionaAdjacencia(1, 2), g.adicionaAdjacencia(2, 1)
+    
     g.adicionaAdjacencia(2, 7), g.adicionaAdjacencia(7, 2)
     g.adicionaAdjacencia(2, 6), g.adicionaAdjacencia(6, 2)
     g.adicionaAdjacencia(2, 3), g.adicionaAdjacencia(3, 2)
