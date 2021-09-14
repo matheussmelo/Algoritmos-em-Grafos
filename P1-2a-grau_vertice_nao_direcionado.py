@@ -49,9 +49,9 @@ if __name__ == "__main__":
     grafo = g.__str__()
     print(grafo)
 
-    numero_arestas = g.contador()
+    numero_vertices = g.contador()
 
-    for x in range(1,numero_arestas):
+    for x in range(1,numero_vertices):
         grau = len(g.__getitem__(x))
         print(f"O grau do vertice {x} resulta em {grau}.")    
 
