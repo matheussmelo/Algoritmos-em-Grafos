@@ -14,6 +14,13 @@ class Graph():
         self.nodes.add(origem)
         self.nodes.add(destino)
 
+    # Adição das relações de arestas e sua vice-versa (graças a simetria do não direcionamento)
+    def adicionaAresta(self, origem, destino):
+        self.graph[origem].append(destino)
+        self.graph[destino].append(origem)
+        self.nodes.add(origem)
+        self.nodes.add(destino)
+
     # Print do grafo
     def __str__(self):
         return_str = ''
@@ -21,11 +28,11 @@ class Graph():
             return_str += f"{node} -> {self.graph[node]}\n"
         return return_str
 
-    # Função para buscar as relações de uma aresta específica através da chave 'key'.
+    # Busca da relação de uma dupla de arestas especifíca através a chave 'key'
     def __getitem__(self, key):
         return self.graph[key]
 
-    # Acumulador para saber a quantidade de arestas.
+    # Acumulador para obter o número de vértices
     def contador(self):
         count = 0
         for i in self.nodes:
@@ -34,32 +41,23 @@ class Graph():
 
 
 if __name__ == "__main__":
-
-    
     g = Graph()
 
-    # Exemplo utilizando um grafo não-direcionado com 7 arestas.
-
-    g.adicionaArco(1, 5)
-    g.adicionaArco(5, 1)
-    g.adicionaArco(1, 4)
-    g.adicionaArco(4, 1)
-    g.adicionaArco(1, 2)
-    g.adicionaArco(2, 1)
-    g.adicionaArco(2, 7)
-    g.adicionaArco(7, 2)
-    g.adicionaArco(2, 6)
-    g.adicionaArco(6, 2)
-    g.adicionaArco(2, 3)
-    g.adicionaArco(3, 2)
-
+    g.adicionaAresta(0, 3)
+    g.adicionaAresta(1, 2)
+    g.adicionaAresta(1, 6)
+    g.adicionaAresta(1, 5)
+    g.adicionaAresta(1, 4)
+    g.adicionaAresta(3, 6)
+    g.adicionaAresta(3, 4)
+    g.adicionaAresta(4, 6)
+    g.adicionaAresta(4, 5)
     
     grafo = g.__str__()
     print(grafo)
 
     numero_arestas = g.contador()
 
-    for x in range(1,numero_arestas):
+    for x in range(numero_arestas):
         grau = len(g.__getitem__(x))
-        print(f"O grau da aresta {x} resulta em {grau}.")    
-
+        print(f"O grau do vertice {x} resulta em {grau}.")
