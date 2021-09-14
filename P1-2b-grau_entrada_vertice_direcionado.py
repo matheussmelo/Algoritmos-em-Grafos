@@ -8,14 +8,14 @@ class Graph():
         self.graph = defaultdict(list)
         self.nodes = set()
 
-    # Atribuição da relação entre arestas ao defaultdict() 'graph' e adição ao set() 'nodes' das arestas(como é um set, não há repetição). Serão usados os parâmetros de origem e destino.
-    def adicionaArco(self, origem, destino):
+    # Atribuição da relação entre arestas com direcionamento saindo do vértice de origem em direção ao destino.
+    def adicionaArco_Saida(self, origem, destino):
         self.graph[origem].append(destino)
         self.nodes.add(origem)
         self.nodes.add(destino)
 
-    def adicionaAresta(self, origem, destino):
-        self.graph[origem].append(destino)
+    # Atribuição de relação entre arestas com direcionamento que chegam na origem.
+    def adicionaArco_Entrada(self, origem, destino):
         self.graph[destino].append(origem)
         self.nodes.add(origem)
         self.nodes.add(destino)
@@ -23,14 +23,14 @@ class Graph():
     def __str__(self):
         return_str = ''
         for node in self.graph:
-            return_str += f"{node} -> {self.graph[node]}\n"
+            return_str += f"{node} recebe {self.graph[node]}\n"
         return return_str
 
     def __getitem__(self, key):
         return self.graph[key]
 
     def contador(self):
-        count = 0
+        count = 1
         for i in self.nodes:
             count += 1
         return count
@@ -39,25 +39,32 @@ class Graph():
 if __name__ == "__main__":
     g = Graph()
 
-    g.adicionaArco(1, 5)
-    g.adicionaArco(1, 4)
-    g.adicionaArco(2, 1)
-    g.adicionaArco(2, 3)
-    g.adicionaArco(3, 1)
-    g.adicionaArco(3, 6)
-    g.adicionaArco(4, 3)
-    g.adicionaArco(5, 7)
-    g.adicionaArco(6, 2)
-    g.adicionaArco(6, 7)
-    g.adicionaArco(7, 2)
-    g.adicionaArco(7, 4)
+    # Exemplo: Slide 64 do contéudo disciplinar.
+    # (origem,destino)
 
+    g.adicionaArco_Entrada(2, 1)
+    g.adicionaArco_Entrada(5, 1)
+
+    g.adicionaArco_Entrada(1, 2)
+    g.adicionaArco_Entrada(3, 2)
+    g.adicionaArco_Entrada(4, 2)
+
+    g.adicionaArco_Entrada(1, 3)
+    g.adicionaArco_Entrada(2, 3)
+    g.adicionaArco_Entrada(5, 3)
+
+    g.adicionaArco_Entrada(1, 4)
+    g.adicionaArco_Entrada(3, 4)
+    
+    g.adicionaArco_Entrada(2, 5)
+    g.adicionaArco_Entrada(3, 5)
+    g.adicionaArco_Entrada(4, 5)
     
     grafo = g.__str__()
     print(grafo)
 
     numero_arestas = g.contador()
-
+    
     for x in range(1,numero_arestas):
         grau = len(g.__getitem__(x))
-        print(f"O grau do vertice de entrada {x} resulta em {grau}.")    
+        print(f"O grau de entrada do vertice {x} resulta em {grau}.")    
